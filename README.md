@@ -25,7 +25,7 @@
 - [ ] auditcontract
 
 ### Script Operation
-- [ ] OP_CHECKLOCKTIMEVERIFY
+- [*] OP_CHECKLOCKTIMEVERIFY
 
 ### Script
 - [ ] func CrossChainContract
