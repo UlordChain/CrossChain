@@ -1,5 +1,6 @@
 # CrossChain
-**On-chain atomic swaps for Ulord and other cryptocurrencies. **
+**On-chain atomic swaps for Ulord and other cryptocurrencies.**
+
 [中文版说明](https://github.com/UlordChain/CrossChain/blob/master/README_CN.md)
 
 
@@ -44,7 +45,7 @@ Due to the requirements of manually exchanging data and creating, sending, and w
 
 **your chain can be used so long as it supports OP_SHA256 and OP_CHECKLOCKTIMEVERIFY.**
 
-##Theory
+## Theory
 
 A cross-chain swap is a trade between two users of different cryptocurrencies. For example, one party may send Ulord to a second party's Ulord address, while the second party would send Bitcoin to the first party's Bitcoin address. However, as the blockchains are unrelated and transactions can not be reversed, this provides no protection against one of the parties never honoring their end of the trade. One common solution to this problem is to introduce a mutually-trusted third party for escrow. An atomic cross-chain swap solves this problem without the need for a third party.
 
@@ -65,4 +66,22 @@ This procedure is atomic (with timeout) as it gives each party at least 24 hours
 The image below provides a visual of the steps each party performs and the transfer of data between each party.
 
 ![SequenceDiagram](https://github.com/UlordChain/CrossChain/blob/master/CrossChain%E2%80%98s%20SequenceDiagram_EN.jpg)
+
+## Command Line
+Separate command line utilities are provided to handle the transactions required to perform a cross-chain atomic swap for each supported blockchain. For a swap between Bitcoin and Ulord, the two utilities btcatomicswap and dcratomicswap are used. Both tools must be used by both parties performing the swap.
+
+Different tools may require different flags to use them with the supported wallet. For example, btcatomicswap includes flags for the RPC username and password while Ulordswap does not. Running a tool without any parameters will show the full usage help.
+
+All of the tools support the same six commands. These commands are:
+
+  ```
+Commands:
+
+  initiate <participant address> <amount>
+  participate <initiator address> <amount> <secret hash>
+  redeem <contract> <contract transaction> <secret>
+  refund <contract> <contract transaction>
+  extractsecret <redemption transaction> <secret hash>
+  auditcontract <contract> <contract transaction>
+  ```
 
