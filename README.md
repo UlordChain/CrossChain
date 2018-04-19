@@ -84,4 +84,36 @@ Commands:
   extractsecret <redemption transaction> <secret hash>
   auditcontract <contract> <contract transaction>
   ```
+**initiate <participant address> <amount>**
 
+The initiate command is performed by the initiator to create the first contract. The contract is created with a locktime of 48 hours in the future. This command returns the secret, the secret hash, the contract script, the contract transaction, and a refund transaction that can be sent after 48 hours if necessary.
+
+Running this command will prompt for whether to publish the contract transaction. If everything looks correct, the transaction should be published. The refund transaction should be saved in case a refund is required to be made later.
+
+**participate <initiator address> <amount> <secret hash>**
+
+The participate command is performed by the participant to create a contract on the second blockchain. It operates similarly to initiate but requires using the secret hash from the initiator's contract and creates the contract with a locktime of 24 hours.
+
+Running this command will prompt for whether to publish the contract transaction. If everything looks correct, the transaction should be published. The refund transaction should be saved in case a refund is required to be made later.
+
+**redeem <contract> <contract transaction> <secret>**
+
+The redeem command is performed by both parties to redeem coins paid into the contract created by the other party. Redeeming requires the secret and must be performed by the initiator first. Once the initiator's redemption has been published, the secret may be extracted from the transaction and the participant may also redeem their coins.
+
+Running this command will prompt for whether to publish the redemption transaction. If everything looks correct, the transaction should be published.
+
+**refund <contract> <contract transaction>**
+
+The refund command is used to create and send a refund of a contract transaction. While the refund transaction is created and displayed during contract creation in the initiate and participate steps, the refund can also be created after the fact in case there was any issue sending the transaction (e.g. the contract transaction was malleated or the refund fee is now too low).
+
+Running this command will prompt for whether to publish the redemption transaction. If everything looks correct, the transaction should be published.
+
+**extractsecret <redemption transaction> <secret hash>**
+
+The extractsecret command is used by the participant to extract the secret from the initiator's redemption transaction. With the secret known, the participant may claim the coins paid into the initiator's contract.
+
+The secret hash is a required parameter so that "nonstandard" redemption transactions won't confuse the tool and the secret can still be discovered.
+
+**auditcontract <contract> <contract transaction>**
+
+The auditcontract command inspects a contract script and parses out the addresses that may claim the output, the locktime, and the secret hash. It also validates that the contract transaction pays to the contract and reports the contract output amount. Each party should audit the contract provided by the other to verify that their address is the recipient address, the output value is correct, and that the locktime is sensible.
