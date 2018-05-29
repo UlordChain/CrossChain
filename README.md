@@ -1,5 +1,5 @@
 # CrossChain
-**On-chain atomic swaps for Ulord and other cryptocurrencies.**
+**On-chain atomic swaps for Ulord Token(UT) and other cryptocurrencies.**
 
 [中文版说明](https://github.com/UlordChain/CrossChain/blob/master/README_CN.md)
 
